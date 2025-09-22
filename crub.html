@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sieng Mnagly SV15 final project</title>
+</head>
+<link rel="stylesheet" href="my_css.css">
+
+<body>
+<!-- header -->
+    <div class="font_header" >
+        <h1>Input your Information</h1>
+    </div>
+    <hr class="underline">
+</body>
+<!-- Dak inform jol -->
+<body>
+    <div class="form_list">
+        <div class="form">
+            
+            <label for="name">Your Name:</label>
+            <input type="text" name="text" id="name" class="input">
+
+            <label for="gender">Your Gender</label>
+            <select name="gender" id="gender" class="input">
+                <option>Select</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+
+            <label for="age">Your AGE</label>
+            <input type="number" name="number" id="number" class="input">
+
+            <label for="email">Your Email</label>
+            <input type="email" name="email" id="email" class="input">
+
+            <label for="profile">Your Profile</label>
+            <input type="file" name="file" id="file" class="input">
+            
+            <div class="button">
+                <button type="button" class="cancel">Cancel</button>
+                <button type="button" id="btn" class="save">Save</button>
+            </div>
+
+        </div>
+
+        <!-- Get ti the list -->
+
+        <div class="table">
+            <table>
+                <thead>
+                    <tr class="table_head">
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>profile</th>
+                        <th>Action</th>
+                    </tr>
+                    <tbody id="table_body"></tbody>
+                    <!-- <tr class="">
+                        <td>1</td>
+                        <td>Sky</td>
+                        <td>Female</td>
+                        <td>2</td>
+                        <td>fuckyouskin@gmail.com</td>
+                        <td>profile.png</td> -->
+                        <!-- <td>
+                            <button type="button">Edit</button>
+                            <button type="button" class="delete">Delete</button>
+                        </td> -->
+                    <!-- </tr>  -->
+                </thead >
+            </table>
+        </div>
+    </div>
+<script>
+    const input_name = document.getElementById("name");
+    const input_gender = document.getElementById("gender");
+    const input_age = document.getElementById("number");
+    const input_email = document.getElementById("email");
+    const input_file = document.getElementById("file");
+
+    let btn = document.getElementById("btn");
+    let user = [];
+
+    btn.addEventListener('click', function() {
+        let name = input_name.value;
+        let gender = input_gender.value;
+        let age = input_age.value;
+        let email = input_email.value;
+        let file = input_file.files[0] ? input_file.files[0].name : "";
+
+        // add new record
+
+        user.push({
+            name, 
+            gender, 
+            age, 
+            email, 
+            file
+        });
+
+        table();
+        resetForm();
+        
+    });
+
+    function resetForm() {
+        input_name.value = "";
+        input_gender.value = "Select";
+        input_age.value = "";
+        input_email.value = "";
+        input_file.value = "";
+    };
+
+    const tableBody = document.getElementById('table_body');
+
+    function table() {
+        tableBody.innerHTML = "";
+        user.forEach((item, index) => {
+            const row = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${item.name}</td>
+                    <td>${item.gender}</td>
+                    <td>${item.age}</td>
+                    <td>${item.email}</td>
+                    <td>${item.file}</td>
+                    <td>
+                        <button onclick="deleteRow(${index})">Delete</button>
+                    </td>
+                </tr>`
+            tableBody.innerHTML += row; 
+        });
+    };
+
+    function deleteRow(i) {
+        user.splice(i, 1);
+        table();
+    };
+</script>
+</body>

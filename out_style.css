@@ -1,0 +1,20 @@
+.fix_image{
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+.item_box{
+    width: 70%;
+    border: none;
+    box-shadow: 0px 11px 26px -13px;
+}
+.col-sm-3{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.row{
+    position: relative;
+    padding: 20px;
+    margin: 50px;
+}
